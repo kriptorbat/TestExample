@@ -1,4 +1,4 @@
-package com.kuloma.testexample
+package com.kuloma.testexample.main
 
 import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
