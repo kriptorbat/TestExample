@@ -32,8 +32,8 @@ import java.sql.Timestamp
 
 @Composable
 fun ToDoCard(entity: ToDoEntity, toClickItem : () -> Unit, viewModel: MainViewModel) {
-    val startTime = viewModel.formatTimestamp(entity.date_finifsh.toLong())
-    val endTime = viewModel.formatTimestamp(entity.date_finifsh.toLong())
+    val startTime = viewModel.formatTimestamp(entity.dateStart.toLong())
+    val endTime = viewModel.formatTimestamp(entity.dateFinish.toLong())
 
     Card(
         modifier = Modifier

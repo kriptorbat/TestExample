@@ -41,30 +41,6 @@ fun MainRoot(viewModel: MainViewModel){
         mutableStateOf("")
     }
 
-    val d1 = ToDoEntity(
-        id = 1,
-        date_start = "1733664511",
-        date_finifsh = "1733664523",
-        name = "дело",
-        description = "савбфвафылав"
-    )
-    val d2 = ToDoEntity(
-        id = 1,
-        date_start = "1733664511",
-        date_finifsh = "1733664523",
-        name = "дело2",
-        description = "савбфвафылав2"
-    )
-    val d3 = ToDoEntity(
-        id = 1,
-        date_start = "1733664511",
-        date_finifsh = "1733664523",
-        name = "дело2",
-        description = "савбфвафылав2"
-    )
-    listToDo.add(d1)
-    listToDo.add(d2)
-    listToDo.add(d3)
     Box{
         Column {
             CalendarScreen(
@@ -79,11 +55,18 @@ fun MainRoot(viewModel: MainViewModel){
                 viewModel = viewModel
             )
         }
+
         Box(modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomStart
         ){
             FloatingActionButton(onClick = {
-                Log.d("fab", "hi")
+                val entity = ToDoEntity(
+                    name = "Дела",
+                    description = "блаблаблабла",
+                    dateStart = "1733664511",
+                    dateFinish = "1733664511"
+                )
+                //viewModel.addItem(entity)
             },
                 modifier = Modifier.padding(20.dp),
                 containerColor = Blue,

@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.kuloma.testexample.ToDoEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface Dao {
@@ -15,5 +16,5 @@ interface Dao {
     fun deleteItem(entity: ToDoEntity)
 
     @Query("SELECT * FROM toDo")
-    fun getAllItem(): List<ToDoEntity>
+    fun getAllItems(): Flow<List<ToDoEntity>>
 }
