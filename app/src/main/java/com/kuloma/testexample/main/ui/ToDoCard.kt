@@ -21,13 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kuloma.testexample.ToDoEntity
 import com.kuloma.testexample.main.MainViewModel
-import com.kuloma.testexample.ui.theme.Blue
-import com.kuloma.testexample.ui.theme.VeryDarkBlue
+import com.kuloma.testexample.main.theme.Blue
+import com.kuloma.testexample.main.theme.VeryDarkBlue
 import java.sql.Timestamp
 
 @Composable

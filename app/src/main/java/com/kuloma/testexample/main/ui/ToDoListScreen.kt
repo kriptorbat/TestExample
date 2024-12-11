@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.kuloma.testexample.ToDoEntity
 import com.kuloma.testexample.main.MainViewModel
-import com.kuloma.testexample.ui.theme.DarkBlue
+import com.kuloma.testexample.main.theme.DarkBlue
 
 @Composable
 fun ToDoListScreen(entities: List<ToDoEntity>,

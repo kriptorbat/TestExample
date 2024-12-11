@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,15 +23,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.asLiveData
 
 import com.kuloma.testexample.ToDoEntity
 import com.kuloma.testexample.main.ui.CalendarScreen
 import com.kuloma.testexample.main.ui.ToDoListScreen
-import com.kuloma.testexample.ui.theme.Blue
-import com.kuloma.testexample.ui.theme.DarkBlue
-import com.kuloma.testexample.ui.theme.VeryDarkBlue
+import com.kuloma.testexample.main.theme.Blue
+import com.kuloma.testexample.main.theme.DarkBlue
+import com.kuloma.testexample.main.theme.VeryDarkBlue
 import java.util.Calendar
 
 @Composable
@@ -55,6 +58,12 @@ fun MainRoot(viewModel: MainViewModel,
                     onDateClick(date)
                 },
                 datesWithToDo = dateWithToDo
+            )
+            Text(
+                modifier = Modifier.fillMaxWidth().background(VeryDarkBlue),
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                text = changedDate
             )
             ToDoListScreen(
                 entities = toDoList,

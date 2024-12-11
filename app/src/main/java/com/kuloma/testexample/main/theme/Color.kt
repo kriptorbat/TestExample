@@ -1,4 +1,4 @@
-package com.kuloma.testexample.ui.theme
+package com.kuloma.testexample.main.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,5 +1,6 @@
 package com.kuloma.testexample.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -11,7 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.asLiveData
 import com.kuloma.testexample.ToDoEntity
-import com.kuloma.testexample.ui.theme.TestExampleTheme
+import com.kuloma.testexample.info.InfoActivity
+import com.kuloma.testexample.main.theme.TestExampleTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -22,7 +24,6 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-
             var listToDo by remember {
                 mutableStateOf(listOf<ToDoEntity>())
             }
@@ -37,8 +38,16 @@ class MainActivity : ComponentActivity() {
             TestExampleTheme {
                 MainRoot(
                     viewModel,
-                    onItemClick = { enity ->
-                        //старт окна для подробной информации
+                    onItemClick = { entity ->
+                        val intent = Intent(this, InfoActivity::class.java).apply {
+                            putExtra("name", entity.name)
+                            putExtra("description", entity.description)
+                            putExtra("start_date", entity.dateStart)
+                            putExtra("finish_date", entity.dateFinish)
+                            putExtra("day_date", entity.dayDate)
+
+                        }
+                        startActivity(intent)
                     },
                     onDateClick = { day ->
                         viewModel.getAllItemByDate(day).asLiveData().observe(this){ list ->
