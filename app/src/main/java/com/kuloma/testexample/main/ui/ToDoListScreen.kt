@@ -15,7 +15,7 @@ import com.kuloma.testexample.ui.theme.DarkBlue
 
 @Composable
 fun ToDoListScreen(entities: List<ToDoEntity>,
-                   toClickItem : () -> Unit,
+                   toClickItem : (ToDoEntity) -> Unit,
                    viewModel: MainViewModel
 ) {
     val listState = rememberLazyListState()
@@ -28,7 +28,7 @@ fun ToDoListScreen(entities: List<ToDoEntity>,
             items(entities) { entity ->
                 ToDoCard(
                     entity = entity,
-                    toClickItem = {toClickItem()},
+                    toClickItem = {toClickItem(entity)},
                     viewModel = viewModel
                 )
             }

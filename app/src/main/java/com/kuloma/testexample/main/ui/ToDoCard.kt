@@ -58,9 +58,9 @@ fun ToDoCard(entity: ToDoEntity, toClickItem : () -> Unit, viewModel: MainViewMo
 
             Box(
                 modifier = Modifier
-                    .width(10.dp) // Ширина линии
-                    .fillMaxHeight() // Заполнить высоту
-                    .background(Blue) // Цвет линии
+                    .width(10.dp)
+                    .fillMaxHeight()
+                    .background(Blue)
             )
             Text(
                 text = entity.name,
@@ -74,9 +74,9 @@ fun ToDoCard(entity: ToDoEntity, toClickItem : () -> Unit, viewModel: MainViewMo
             ){
                 Box(
                     modifier = Modifier
-                        .width(1.dp) // Ширина линии
-                        .fillMaxHeight() // Заполнить высоту
-                        .background(Color.White) // Цвет линии
+                        .width(1.dp)
+                        .fillMaxHeight()
+                        .background(Color.White)
                 )
                 Spacer(modifier = Modifier.padding(5.dp))
                 Column(

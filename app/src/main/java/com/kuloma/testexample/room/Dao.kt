@@ -17,4 +17,8 @@ interface Dao {
 
     @Query("SELECT * FROM toDo")
     fun getAllItems(): Flow<List<ToDoEntity>>
+
+
+    @Query("SELECT * FROM toDo WHERE day_date = :day")
+    fun getAllItemsByDay(day: String): Flow<List<ToDoEntity>>
 }

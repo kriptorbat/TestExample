@@ -18,4 +18,6 @@ class RepositoryImpl(context: Context): Repository {
 
     override fun getAllToDo(): Flow<List<ToDoEntity>> = db.getDao().getAllItems()
 
+    override fun getAllToDoByDay(day: String): Flow<List<ToDoEntity>> = db.getDao().getAllItemsByDay(day)
+
 }

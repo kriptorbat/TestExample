@@ -1,16 +1,38 @@
 package com.kuloma.testexample.main
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.kuloma.testexample.Repository
+import com.kuloma.testexample.ToDoEntity
+import com.kuloma.testexample.room.RepositoryImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class MainViewModel: ViewModel() {
+class MainViewModel(context: Context): ViewModel() {
 
-//    var repository: Repository = RepositoryImpl(context = context)
-//
-//    fun addItem(entity: ToDoEntity){
-//        repository.insertToDo(entity)
+    var repository: Repository = RepositoryImpl(context = context)
+
+    fun addItem(entity: ToDoEntity){
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.insertToDo(entity)
+        }
+    }
+    fun getAllItemByDate(day: String): Flow<List<ToDoEntity>>{
+        return repository.getAllToDoByDay(day)
+    }
+//    fun getAllItem(): List<ToDoEntity>{
+//        return repository.getAllToDo().asLiveData().observe()
 //    }
 
     fun formatTimestamp(unixTimestamp: Long): String {
@@ -23,12 +45,12 @@ class MainViewModel: ViewModel() {
         }
     }
 
-//    companion object{
-//        val Factory: ViewModelProvider.Factory = viewModelFactory{
-//            initializer {
-//                val context = this[APPLICATION_KEY] as Context
-//                MainViewModel(context)
-//            }
-//        }
-//    }
+    companion object{
+        val Factory: ViewModelProvider.Factory = viewModelFactory{
+            initializer {
+                val context = this[APPLICATION_KEY] as Context
+                MainViewModel(context)
+            }
+        }
+    }
 }

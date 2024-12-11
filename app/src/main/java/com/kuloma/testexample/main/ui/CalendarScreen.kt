@@ -1,5 +1,6 @@
 package com.kuloma.testexample.main.ui
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -16,8 +17,8 @@ import java.util.Calendar
 
 @Composable
 fun CalendarScreen(
-    toDateClick: (String) -> Unit,
-    datesWithToDo: List<String>
+    onDateClick: (String) -> Unit,
+    datesWithToDo: List<String>,
 ) {
 //    var date by remember {
 //        mutableStateOf("")
@@ -40,8 +41,11 @@ fun CalendarScreen(
         it.setOnCalendarDayClickListener(
             object : OnCalendarDayClickListener {
                 override fun onClick(calendarDay: CalendarDay) {
-//                        Calendar.MONTH)+1
-                    toDateClick(calendarDay.calendar.get(Calendar.DAY_OF_MONTH).toString())
+                    val date = calendarDay.calendar.get(Calendar.YEAR).toString() + "." +
+                            (calendarDay.calendar.get(Calendar.MONTH)+1).toString() + "." +
+                        calendarDay.calendar.get(Calendar.DAY_OF_MONTH).toString()
+                    Log.d("date", date)
+                    onDateClick(date)
                 }
             })
     })

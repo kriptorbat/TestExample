@@ -20,4 +20,7 @@ data class ToDoEntity(
 
     @ColumnInfo(name = "description")
     val description: String,
+
+    @ColumnInfo(name = "day_date")
+    val dayDate: String
 )

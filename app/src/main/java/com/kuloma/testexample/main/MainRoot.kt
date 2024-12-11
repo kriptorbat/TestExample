@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.asLiveData
 
 import com.kuloma.testexample.ToDoEntity
 import com.kuloma.testexample.main.ui.CalendarScreen
@@ -32,26 +33,32 @@ import com.kuloma.testexample.ui.theme.VeryDarkBlue
 import java.util.Calendar
 
 @Composable
-fun MainRoot(viewModel: MainViewModel){
+fun MainRoot(viewModel: MainViewModel,
+             onItemClick : (ToDoEntity) -> Unit,
+             onDateClick : (String) -> Unit,
+             toDoList: List<ToDoEntity>
+){
     //здесь будет вызов функции которая возвращает список с днями в которых есть события
-    val listToDo: MutableList<ToDoEntity> = mutableListOf()
 
     val items by remember { mutableStateOf(listOf<String>()) }
-    var chainedDate by remember {
+    var changedDate by remember {
         mutableStateOf("")
     }
 
     Box{
         Column {
             CalendarScreen(
-                toDateClick = { date ->
-                    chainedDate = date
+                onDateClick = { date ->
+                    changedDate = date
+                    onDateClick(date)
                 },
                 datesWithToDo = items
             )
             ToDoListScreen(
-                entities = listToDo,
-                toClickItem = {},
+                entities = toDoList,
+                toClickItem = { entity ->
+                    onItemClick(entity)
+                },
                 viewModel = viewModel
             )
         }
@@ -64,9 +71,10 @@ fun MainRoot(viewModel: MainViewModel){
                     name = "Дела",
                     description = "блаблаблабла",
                     dateStart = "1733664511",
-                    dateFinish = "1733664511"
+                    dateFinish = "1733664511",
+                    dayDate = changedDate
                 )
-                //viewModel.addItem(entity)
+                viewModel.addItem(entity)
             },
                 modifier = Modifier.padding(20.dp),
                 containerColor = Blue,
