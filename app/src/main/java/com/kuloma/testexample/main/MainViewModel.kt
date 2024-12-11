@@ -31,9 +31,10 @@ class MainViewModel(context: Context): ViewModel() {
     fun getAllItemByDate(day: String): Flow<List<ToDoEntity>>{
         return repository.getAllToDoByDay(day)
     }
-//    fun getAllItem(): List<ToDoEntity>{
-//        return repository.getAllToDo().asLiveData().observe()
-//    }
+
+    fun getAllItem(): Flow<List<ToDoEntity>>{
+        return repository.getAllToDo()
+    }
 
     fun formatTimestamp(unixTimestamp: Long): String {
         return try {

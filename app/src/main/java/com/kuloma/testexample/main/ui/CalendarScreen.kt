@@ -18,19 +18,35 @@ import java.util.Calendar
 @Composable
 fun CalendarScreen(
     onDateClick: (String) -> Unit,
-    datesWithToDo: List<String>,
+    datesWithToDo: Set<String>,
 ) {
-//    var date by remember {
-//        mutableStateOf("")
-//    }
-
     val calendars: ArrayList<CalendarDay> = ArrayList()
-    val calendar = Calendar.getInstance()
-    calendar.set(2024, 11, 20)
-    val calendarDay = CalendarDay(calendar)
-    calendarDay.imageResource = R.drawable.baseline_fiber_manual_record_24
 
-    calendars.add(calendarDay)
+    for (dateString in datesWithToDo) {
+        // Разбираем строку даты
+        val parts = dateString.split(".")
+
+        val day = parts[2].toIntOrNull() ?: continue
+        val month = parts[1].toIntOrNull()?.minus(1) ?: continue
+        val year = parts[0].toIntOrNull() ?: continue
+
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+
+        val calendarDay = CalendarDay(calendar)
+        calendarDay.imageResource = R.drawable.baseline_fiber_manual_record_24
+
+        calendars.add(calendarDay)
+
+    }
+
+
+//    val calendar = Calendar.getInstance()
+//    calendar.set(2024, 11, 20)
+//    val calendarDay = CalendarDay(calendar)
+//    calendarDay.imageResource = R.drawable.baseline_fiber_manual_record_24
+
+//    calendars.add(calendarDay)
 
 
     AndroidView(factory = { CalendarView(it) }, update = {
@@ -42,8 +58,8 @@ fun CalendarScreen(
             object : OnCalendarDayClickListener {
                 override fun onClick(calendarDay: CalendarDay) {
                     val date = calendarDay.calendar.get(Calendar.YEAR).toString() + "." +
-                            (calendarDay.calendar.get(Calendar.MONTH)+1).toString() + "." +
-                        calendarDay.calendar.get(Calendar.DAY_OF_MONTH).toString()
+                            (calendarDay.calendar.get(Calendar.MONTH) + 1).toString() + "." +
+                            calendarDay.calendar.get(Calendar.DAY_OF_MONTH).toString()
                     Log.d("date", date)
                     onDateClick(date)
                 }

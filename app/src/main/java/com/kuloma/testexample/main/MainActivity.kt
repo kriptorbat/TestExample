@@ -1,6 +1,7 @@
 package com.kuloma.testexample.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,10 +20,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         setContent {
 
             var listToDo by remember {
                 mutableStateOf(listOf<ToDoEntity>())
+            }
+            var datesWithToDo by remember {
+                mutableStateOf(setOf<String>())
+            }
+            viewModel.getAllItem().asLiveData().observe(this){ list ->
+                datesWithToDo = list.map { it.dayDate }.toSet()
+                for(str:String in datesWithToDo)
+                Log.d("dateMainAct",str)
             }
             TestExampleTheme {
                 MainRoot(
@@ -35,7 +45,8 @@ class MainActivity : ComponentActivity() {
                             listToDo = list
                         }
                     },
-                    toDoList = listToDo
+                    toDoList = listToDo,
+                    dateWithToDo = datesWithToDo
                 )
             }
         }

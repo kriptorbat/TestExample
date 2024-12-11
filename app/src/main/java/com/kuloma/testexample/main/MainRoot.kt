@@ -36,11 +36,13 @@ import java.util.Calendar
 fun MainRoot(viewModel: MainViewModel,
              onItemClick : (ToDoEntity) -> Unit,
              onDateClick : (String) -> Unit,
-             toDoList: List<ToDoEntity>
+             toDoList: List<ToDoEntity>,
+             dateWithToDo: Set<String>
 ){
     //здесь будет вызов функции которая возвращает список с днями в которых есть события
 
-    val items by remember { mutableStateOf(listOf<String>()) }
+//    var  by remember { mutableStateOf(listOf<String>()) }
+
     var changedDate by remember {
         mutableStateOf("")
     }
@@ -52,7 +54,7 @@ fun MainRoot(viewModel: MainViewModel,
                     changedDate = date
                     onDateClick(date)
                 },
-                datesWithToDo = items
+                datesWithToDo = dateWithToDo
             )
             ToDoListScreen(
                 entities = toDoList,
