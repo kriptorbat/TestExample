@@ -1,10 +1,13 @@
 package com.kuloma.testexample.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,11 +20,10 @@ import com.kuloma.testexample.main.theme.TestExampleTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainViewModel by viewModels {MainViewModel.Factory}
+    private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setContent {
             var listToDo by remember {
@@ -30,16 +32,21 @@ class MainActivity : ComponentActivity() {
             var datesWithToDo by remember {
                 mutableStateOf(setOf<String>())
             }
-            viewModel.getAllItem().asLiveData().observe(this){ list ->
+            val launcher =
+                rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    Log.d("result", result.resultCode.toString())
+                    viewModel.deleteToDo(result.resultCode)
+                }
+
+            viewModel.getAllItem().asLiveData().observe(this) { list ->
                 datesWithToDo = list.map { it.dayDate }.toSet()
-                for(str:String in datesWithToDo)
-                Log.d("dateMainAct",str)
             }
             TestExampleTheme {
                 MainRoot(
                     viewModel,
                     onItemClick = { entity ->
                         val intent = Intent(this, InfoActivity::class.java).apply {
+                            putExtra("id", entity.id)
                             putExtra("name", entity.name)
                             putExtra("description", entity.description)
                             putExtra("start_date", entity.dateStart)
@@ -47,10 +54,10 @@ class MainActivity : ComponentActivity() {
                             putExtra("day_date", entity.dayDate)
 
                         }
-                        startActivity(intent)
+                        launcher.launch(intent)
                     },
                     onDateClick = { day ->
-                        viewModel.getAllItemByDate(day).asLiveData().observe(this){ list ->
+                        viewModel.getAllItemByDate(day).asLiveData().observe(this) { list ->
                             listToDo = list
                         }
                     },
@@ -61,6 +68,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 //@Preview(showBackground = true)
 //@Composable

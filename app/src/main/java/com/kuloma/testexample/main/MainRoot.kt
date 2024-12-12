@@ -42,8 +42,6 @@ fun MainRoot(viewModel: MainViewModel,
              toDoList: List<ToDoEntity>,
              dateWithToDo: Set<String>
 ){
-    //здесь будет вызов функции которая возвращает список с днями в которых есть события
-
 //    var  by remember { mutableStateOf(listOf<String>()) }
 
     var changedDate by remember {

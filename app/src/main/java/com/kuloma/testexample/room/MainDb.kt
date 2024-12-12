@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.kuloma.testexample.ToDoEntity
 
-@Database(entities = [ToDoEntity::class], version = 2)
+@Database(entities = [ToDoEntity::class], version = 3)
 abstract class MainDb: RoomDatabase() {
     abstract fun getDao(): Dao
     companion object{

@@ -35,6 +35,11 @@ class MainViewModel(context: Context): ViewModel() {
     fun getAllItem(): Flow<List<ToDoEntity>>{
         return repository.getAllToDo()
     }
+    fun deleteToDo(id: Int){
+        CoroutineScope(Dispatchers.IO).launch{
+            repository.deleteToDoById(id)
+        }
+    }
 
     fun formatTimestamp(unixTimestamp: Long): String {
         return try {

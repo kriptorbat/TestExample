@@ -12,8 +12,8 @@ interface Dao {
     @Insert
     fun insertItem(entity: ToDoEntity)
 
-    @Delete
-    fun deleteItem(entity: ToDoEntity)
+    @Query("DELETE FROM toDo WHERE id = :id")
+    fun deleteItemById(id: Int)
 
     @Query("SELECT * FROM toDo")
     fun getAllItems(): Flow<List<ToDoEntity>>

@@ -12,8 +12,8 @@ class RepositoryImpl(context: Context): Repository {
         db.getDao().insertItem(entity)
     }
 
-    override fun deleteToDo(entity: ToDoEntity) {
-        db.getDao().deleteItem(entity)
+    override fun deleteToDoById(id: Int) {
+        db.getDao().deleteItemById(id)
     }
 
     override fun getAllToDo(): Flow<List<ToDoEntity>> = db.getDao().getAllItems()
