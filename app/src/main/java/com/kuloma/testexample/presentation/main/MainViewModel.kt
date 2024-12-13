@@ -4,12 +4,10 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.kuloma.testexample.Repository
-import com.kuloma.testexample.ToDoEntity
+import com.kuloma.testexample.domain.Repository
+import com.kuloma.testexample.domain.ToDoEntity
 import com.kuloma.testexample.room.RepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

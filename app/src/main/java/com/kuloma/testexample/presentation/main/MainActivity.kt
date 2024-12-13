@@ -1,6 +1,5 @@
 package com.kuloma.testexample.presentation.main
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,8 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.asLiveData
-import com.kuloma.testexample.ToDoEntity
+import com.kuloma.testexample.R
+import com.kuloma.testexample.domain.ToDoEntity
 import com.kuloma.testexample.presentation.add.AddActivity
 import com.kuloma.testexample.presentation.info.InfoActivity
 import com.kuloma.testexample.presentation.theme.TestExampleTheme
@@ -26,7 +27,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        window.statusBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue )
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue)
         setContent {
             var changedDate by remember {
                 mutableStateOf("")

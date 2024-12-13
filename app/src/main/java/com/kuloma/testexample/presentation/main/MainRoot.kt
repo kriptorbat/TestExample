@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.kuloma.testexample.ToDoEntity
+import com.kuloma.testexample.domain.ToDoEntity
 import com.kuloma.testexample.presentation.main.ui.CalendarScreen
 import com.kuloma.testexample.presentation.main.ui.ToDoListScreen
 import com.kuloma.testexample.presentation.theme.Blue

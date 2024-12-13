@@ -1,4 +1,4 @@
-package com.kuloma.testexample
+package com.kuloma.testexample.domain
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

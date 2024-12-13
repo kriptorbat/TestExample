@@ -1,8 +1,8 @@
 package com.kuloma.testexample.room
 
 import android.content.Context
-import com.kuloma.testexample.Repository
-import com.kuloma.testexample.ToDoEntity
+import com.kuloma.testexample.domain.Repository
+import com.kuloma.testexample.domain.ToDoEntity
 import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(context: Context): Repository {
