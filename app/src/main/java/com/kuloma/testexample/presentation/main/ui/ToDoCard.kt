@@ -1,4 +1,4 @@
-package com.kuloma.testexample.main.ui
+package com.kuloma.testexample.presentation.main.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,9 +26,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kuloma.testexample.ToDoEntity
-import com.kuloma.testexample.main.MainViewModel
-import com.kuloma.testexample.main.theme.Blue
-import com.kuloma.testexample.main.theme.VeryDarkBlue
+import com.kuloma.testexample.presentation.main.MainViewModel
+import com.kuloma.testexample.presentation.theme.Blue
+import com.kuloma.testexample.presentation.theme.VeryDarkBlue
 import java.sql.Timestamp
 
 @Composable

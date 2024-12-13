@@ -1,9 +1,6 @@
-package com.kuloma.testexample.main
+package com.kuloma.testexample.presentation.main
 
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +11,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,25 +21,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.asLiveData
-
 import com.kuloma.testexample.ToDoEntity
-import com.kuloma.testexample.main.ui.CalendarScreen
-import com.kuloma.testexample.main.ui.ToDoListScreen
-import com.kuloma.testexample.main.theme.Blue
-import com.kuloma.testexample.main.theme.DarkBlue
-import com.kuloma.testexample.main.theme.VeryDarkBlue
-import java.util.Calendar
+import com.kuloma.testexample.presentation.main.ui.CalendarScreen
+import com.kuloma.testexample.presentation.main.ui.ToDoListScreen
+import com.kuloma.testexample.presentation.theme.Blue
+import com.kuloma.testexample.presentation.theme.VeryDarkBlue
 
 @Composable
 fun MainRoot(viewModel: MainViewModel,
              onItemClick : (ToDoEntity) -> Unit,
              onDateClick : (String) -> Unit,
+             onClickAdd : () -> Unit,
              toDoList: List<ToDoEntity>,
              dateWithToDo: Set<String>
 ){
-//    var  by remember { mutableStateOf(listOf<String>()) }
-
     var changedDate by remember {
         mutableStateOf("")
     }
@@ -76,14 +67,15 @@ fun MainRoot(viewModel: MainViewModel,
             contentAlignment = Alignment.BottomStart
         ){
             FloatingActionButton(onClick = {
-                val entity = ToDoEntity(
-                    name = "Дела",
-                    description = "блаблаблабла",
-                    dateStart = "1733664511",
-                    dateFinish = "1733664511",
-                    dayDate = changedDate
-                )
-                viewModel.addItem(entity)
+                onClickAdd()
+//                val entity = ToDoEntity(
+//                    name = "Дела",
+//                    description = "блаблаблабла",
+//                    dateStart = "1733664511",
+//                    dateFinish = "1733664511",
+//                    dayDate = changedDate
+//                )
+//                viewModel.addItem(entity)
             },
                 modifier = Modifier.padding(20.dp),
                 containerColor = Blue,

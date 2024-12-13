@@ -1,4 +1,4 @@
-package com.kuloma.testexample.main.theme
+package com.kuloma.testexample.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

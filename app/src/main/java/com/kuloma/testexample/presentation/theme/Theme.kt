@@ -1,4 +1,4 @@
-package com.kuloma.testexample.main.theme
+package com.kuloma.testexample.presentation.theme
 
 import android.app.Activity
 import android.os.Build

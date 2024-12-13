@@ -1,9 +1,10 @@
-package com.kuloma.testexample.main
+package com.kuloma.testexample.presentation.main
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -15,8 +16,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.asLiveData
 import com.kuloma.testexample.ToDoEntity
-import com.kuloma.testexample.info.InfoActivity
-import com.kuloma.testexample.main.theme.TestExampleTheme
+import com.kuloma.testexample.presentation.add.AddActivity
+import com.kuloma.testexample.presentation.info.InfoActivity
+import com.kuloma.testexample.presentation.theme.TestExampleTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -26,16 +28,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            var changedDate by remember {
+                mutableStateOf("")
+            }
             var listToDo by remember {
                 mutableStateOf(listOf<ToDoEntity>())
             }
             var datesWithToDo by remember {
                 mutableStateOf(setOf<String>())
             }
-            val launcher =
+            val infoLauncher =
                 rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                     Log.d("result", result.resultCode.toString())
                     viewModel.deleteToDo(result.resultCode)
+                }
+            val addLauncher =
+                rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    Log.d("result", result.resultCode.toString())
+                    result.data?.let {
+                        val entity = ToDoEntity(
+                            dateStart = it.getStringExtra("date_start").toString(),
+                            dateFinish = it.getStringExtra("date_finish").toString(),
+                            name = it.getStringExtra("name").toString(),
+                            description = it.getStringExtra("description").toString(),
+                            dayDate = it.getStringExtra("dayDate").toString()
+                        )
+                        viewModel.addItem(entity)
+                    }
                 }
 
             viewModel.getAllItem().asLiveData().observe(this) { list ->
@@ -52,14 +71,23 @@ class MainActivity : ComponentActivity() {
                             putExtra("start_date", entity.dateStart)
                             putExtra("finish_date", entity.dateFinish)
                             putExtra("day_date", entity.dayDate)
-
                         }
-                        launcher.launch(intent)
+                        infoLauncher.launch(intent)
                     },
                     onDateClick = { day ->
+                        changedDate = day
                         viewModel.getAllItemByDate(day).asLiveData().observe(this) { list ->
                             listToDo = list
                         }
+                    },
+                    onClickAdd = {
+                        if(changedDate.isNotEmpty()){
+                            val intent = Intent(this,AddActivity::class.java).apply {
+                                putExtra("day_date",changedDate)
+                            }
+
+                            addLauncher.launch(intent)
+                        } else Toast.makeText(this,"Выбирите дату в календаре",Toast.LENGTH_SHORT).show()
                     },
                     toDoList = listToDo,
                     dateWithToDo = datesWithToDo

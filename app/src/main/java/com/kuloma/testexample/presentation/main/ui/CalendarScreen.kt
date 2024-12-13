@@ -1,4 +1,4 @@
-package com.kuloma.testexample.main.ui
+package com.kuloma.testexample.presentation.main.ui
 
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -12,7 +12,7 @@ import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnCalendarDayClickListener
 import com.kuloma.testexample.R
-import com.kuloma.testexample.main.MainViewModel
+import com.kuloma.testexample.presentation.main.MainViewModel
 import java.util.Calendar
 
 @Composable

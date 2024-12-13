@@ -1,4 +1,4 @@
-package com.kuloma.testexample.main.ui
+package com.kuloma.testexample.presentation.main.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -10,8 +10,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.kuloma.testexample.ToDoEntity
-import com.kuloma.testexample.main.MainViewModel
-import com.kuloma.testexample.main.theme.DarkBlue
+import com.kuloma.testexample.presentation.main.MainViewModel
+import com.kuloma.testexample.presentation.theme.DarkBlue
 
 @Composable
 fun ToDoListScreen(entities: List<ToDoEntity>,
