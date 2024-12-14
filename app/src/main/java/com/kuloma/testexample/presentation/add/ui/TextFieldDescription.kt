@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -15,9 +16,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.kuloma.testexample.presentation.theme.Blue
+import com.kuloma.testexample.presentation.theme.DarkBlue
 import com.kuloma.testexample.presentation.theme.VeryDarkBlue
 
 @Composable
@@ -48,8 +51,13 @@ fun TextFieldDescription(onTextChange: (String) -> Unit) {
                 .heightIn(min = 120.dp),
             shape = RoundedCornerShape(8.dp),
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = Blue,
-                unfocusedContainerColor = VeryDarkBlue
+                focusedContainerColor = DarkBlue,
+                unfocusedContainerColor = VeryDarkBlue,
+                cursorColor = Blue,
+                focusedIndicatorColor = Blue
+            ),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
             ),
             singleLine = false,
             maxLines = 5
