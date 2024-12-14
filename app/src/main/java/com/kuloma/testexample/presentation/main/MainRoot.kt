@@ -68,14 +68,6 @@ fun MainRoot(viewModel: MainViewModel,
         ){
             FloatingActionButton(onClick = {
                 onClickAdd()
-//                val entity = ToDoEntity(
-//                    name = "Дела",
-//                    description = "блаблаблабла",
-//                    dateStart = "1733664511",
-//                    dateFinish = "1733664511",
-//                    dayDate = changedDate
-//                )
-//                viewModel.addItem(entity)
             },
                 modifier = Modifier.padding(20.dp),
                 containerColor = Blue,

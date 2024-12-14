@@ -2,17 +2,11 @@ package com.kuloma.testexample.presentation.main.ui
 
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.viewinterop.AndroidView
 import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnCalendarDayClickListener
 import com.kuloma.testexample.R
-import com.kuloma.testexample.presentation.main.MainViewModel
 import java.util.Calendar
 
 @Composable
@@ -23,7 +17,6 @@ fun CalendarScreen(
     val calendars: ArrayList<CalendarDay> = ArrayList()
 
     for (dateString in datesWithToDo) {
-        // Разбираем строку даты
         val parts = dateString.split(".")
 
         val day = parts[2].toIntOrNull() ?: continue
@@ -39,15 +32,6 @@ fun CalendarScreen(
         calendars.add(calendarDay)
 
     }
-
-
-//    val calendar = Calendar.getInstance()
-//    calendar.set(2024, 11, 20)
-//    val calendarDay = CalendarDay(calendar)
-//    calendarDay.imageResource = R.drawable.baseline_fiber_manual_record_24
-
-//    calendars.add(calendarDay)
-
 
     AndroidView(factory = { CalendarView(it) }, update = {
 

@@ -100,21 +100,4 @@ class MainActivity : ComponentActivity() {
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    TestExampleTheme {
-//        val entity = ToDoEntity(
-//            id = 1,
-//            date_start = "139128338",
-//            date_finifsh = "13413251",
-//            name = "качаца",
-//            description = "Анжумания бегит пресс качат"
-//        )
-//        ToDoCard(entity)
-////        CalendarScreen()
-//    }
-//}
-
-
 
