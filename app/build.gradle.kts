@@ -53,6 +53,12 @@ dependencies {
     //LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
 
+    //Mockito
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.androidx.runner)
+
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

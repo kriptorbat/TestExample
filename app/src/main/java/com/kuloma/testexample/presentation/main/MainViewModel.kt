@@ -17,9 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class MainViewModel(context: Context): ViewModel() {
-
-    var repository: Repository = RepositoryImpl(context = context)
+class MainViewModel(private val repository: Repository): ViewModel() {
 
     fun addItem(entity: ToDoEntity){
         CoroutineScope(Dispatchers.IO).launch {
@@ -40,12 +38,16 @@ class MainViewModel(context: Context): ViewModel() {
     }
 
     fun formatTimestamp(unixTimestamp: Long): String {
-        return try {
-            val date = Date(unixTimestamp * 1000) // Умножаем на 1000 для преобразования секунд в миллисекунды
-            val sdfOutput = SimpleDateFormat("HH:mm", Locale.getDefault())
-            sdfOutput.format(date)
-        } catch (e: Exception) {
+        return if (unixTimestamp < 0) {
             "Неверное время"
+        } else {
+            try {
+                val date = Date(unixTimestamp * 1000)
+                val sdfOutput = SimpleDateFormat("HH:mm", Locale.getDefault())
+                sdfOutput.format(date)
+            } catch (e: Exception) {
+                "Неверное время"
+            }
         }
     }
 
@@ -53,7 +55,8 @@ class MainViewModel(context: Context): ViewModel() {
         val Factory: ViewModelProvider.Factory = viewModelFactory{
             initializer {
                 val context = this[APPLICATION_KEY] as Context
-                MainViewModel(context)
+                val repository: Repository = RepositoryImpl(context)
+                MainViewModel(repository)
             }
         }
     }

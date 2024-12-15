@@ -48,13 +48,3 @@ class AddActivity : ComponentActivity() {
         }
     }
 }
-
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    TestExampleTheme {
-//        AddRoot(onClickBack = {}, onClickAdd = {}, dayDate = "24.12.22")
-//        ToDoTimePicker()
-    }
-}
