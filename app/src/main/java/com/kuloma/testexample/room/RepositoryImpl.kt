@@ -1,9 +1,9 @@
 package com.kuloma.testexample.room
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.kuloma.testexample.domain.Repository
 import com.kuloma.testexample.domain.ToDoEntity
-import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(context: Context): Repository {
     private val db = MainDb.getDb(context = context)
@@ -16,8 +16,5 @@ class RepositoryImpl(context: Context): Repository {
         db.getDao().deleteItemById(id)
     }
 
-    override fun getAllToDo(): Flow<List<ToDoEntity>> = db.getDao().getAllItems()
-
-    override fun getAllToDoByDay(day: String): Flow<List<ToDoEntity>> = db.getDao().getAllItemsByDay(day)
-
+    override fun getAllToDo(): LiveData<List<ToDoEntity>> = db.getDao().getAllItems()
 }

@@ -46,7 +46,8 @@ fun MainRoot(viewModel: MainViewModel,
                     changedDate = date
                     onDateClick(date)
                 },
-                datesWithToDo = dateWithToDo
+                datesWithToDo = dateWithToDo,
+                selectedDate = changedDate
             )
             Text(
                 modifier = Modifier.fillMaxWidth().background(VeryDarkBlue),

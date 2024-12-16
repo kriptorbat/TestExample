@@ -42,21 +42,13 @@ android {
 
 dependencies {
 
-    //Calendar
-    implementation ("com.applandeo:material-calendar-view:1.9.2")
-
     //Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
     //LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
-
-    //Mockito
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.mockito.inline)
-    testImplementation(libs.androidx.runner)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)

@@ -5,18 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.kuloma.testexample.R
 import com.kuloma.testexample.domain.ToDoEntity
 import com.kuloma.testexample.presentation.theme.TestExampleTheme
 
 class InfoActivity : ComponentActivity() {
 
-    private lateinit var viewModel: InfoViewModel
+    val viewModel: InfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[InfoViewModel::class.java]
         window.statusBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue )
         window.navigationBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue)
 

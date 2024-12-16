@@ -1,10 +1,10 @@
 package com.kuloma.testexample.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.kuloma.testexample.domain.ToDoEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface Dao {
@@ -15,9 +15,5 @@ interface Dao {
     fun deleteItemById(id: Int)
 
     @Query("SELECT * FROM toDo")
-    fun getAllItems(): Flow<List<ToDoEntity>>
-
-
-    @Query("SELECT * FROM toDo WHERE day_date = :day")
-    fun getAllItemsByDay(day: String): Flow<List<ToDoEntity>>
+    fun getAllItems(): LiveData<List<ToDoEntity>>
 }

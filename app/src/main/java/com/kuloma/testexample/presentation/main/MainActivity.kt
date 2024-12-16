@@ -14,7 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.distinctUntilChanged
 import com.kuloma.testexample.R
 import com.kuloma.testexample.domain.ToDoEntity
 import com.kuloma.testexample.presentation.add.AddActivity
@@ -27,13 +27,16 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue )
+        window.statusBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue)
         window.navigationBarColor = ContextCompat.getColor(this, R.color.veryDarkBlue)
         setContent {
             var changedDate by remember {
                 mutableStateOf("")
             }
             var listToDo by remember {
+                mutableStateOf(listOf<ToDoEntity>())
+            }
+            var allListToDo by remember {
                 mutableStateOf(listOf<ToDoEntity>())
             }
             var datesWithToDo by remember {
@@ -59,9 +62,16 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-            viewModel.getAllItem().asLiveData().observe(this) { list ->
+
+            viewModel.getAllItem().distinctUntilChanged().observe(this@MainActivity) { list ->
                 datesWithToDo = list.map { it.dayDate }.toSet()
+                allListToDo = list
+                listToDo = list.filter { it.dayDate == changedDate }
+
+                Log.d("tag", "observeGetAllItems")
             }
+
+
             TestExampleTheme {
                 MainRoot(
                     viewModel,
@@ -78,18 +88,18 @@ class MainActivity : ComponentActivity() {
                     },
                     onDateClick = { day ->
                         changedDate = day
-                        viewModel.getAllItemByDate(day).asLiveData().observe(this) { list ->
-                            listToDo = list
-                        }
+                        listToDo = allListToDo.filter { it.dayDate == changedDate }
+
                     },
                     onClickAdd = {
-                        if(changedDate.isNotEmpty()){
-                            val intent = Intent(this,AddActivity::class.java).apply {
-                                putExtra("day_date",changedDate)
+                        if (changedDate.isNotEmpty()) {
+                            val intent = Intent(this, AddActivity::class.java).apply {
+                                putExtra("day_date", changedDate)
                             }
 
                             addLauncher.launch(intent)
-                        } else Toast.makeText(this,"Выбирите дату в календаре",Toast.LENGTH_SHORT).show()
+                        } else Toast.makeText(this, "Выбирите дату в календаре", Toast.LENGTH_SHORT)
+                            .show()
                     },
                     toDoList = listToDo,
                     dateWithToDo = datesWithToDo

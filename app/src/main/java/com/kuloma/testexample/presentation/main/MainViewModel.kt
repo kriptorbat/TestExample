@@ -1,6 +1,7 @@
 package com.kuloma.testexample.presentation.main
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -11,7 +12,6 @@ import com.kuloma.testexample.domain.ToDoEntity
 import com.kuloma.testexample.room.RepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -24,11 +24,8 @@ class MainViewModel(private val repository: Repository): ViewModel() {
             repository.insertToDo(entity)
         }
     }
-    fun getAllItemByDate(day: String): Flow<List<ToDoEntity>>{
-        return repository.getAllToDoByDay(day)
-    }
 
-    fun getAllItem(): Flow<List<ToDoEntity>>{
+    fun getAllItem(): LiveData<List<ToDoEntity>>{
         return repository.getAllToDo()
     }
     fun deleteToDo(id: Int){
